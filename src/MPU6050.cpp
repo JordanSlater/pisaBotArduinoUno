@@ -865,7 +865,7 @@ void MPU6050::setMasterClockSpeed(uint8_t speed) {
  * In read mode, the result of the read is placed in the lowest available 
  * EXT_SENS_DATA register. For further information regarding the allocation of
  * read results, please refer to the EXT_SENS_DATA register description
- * (Registers 73 – 96).
+ * (Registers 73 ï¿½ 96).
  *
  * The MPU-6050 supports a total of five slaves, but Slave 4 has unique
  * characteristics, and so it has its own functions (getSlave4* and setSlave4*).
@@ -2889,6 +2889,7 @@ uint8_t MPU6050::readMemoryByte() {
 void MPU6050::writeMemoryByte(uint8_t data) {
     I2Cdev::writeByte(devAddr, MPU6050_RA_MEM_R_W, data);
 }
+/*
 void MPU6050::readMemoryBlock(uint8_t *data, uint16_t dataSize, uint8_t bank, uint8_t address) {
     setMemoryBank(bank);
     setMemoryStartAddress(address);
@@ -3001,8 +3002,9 @@ bool MPU6050::writeMemoryBlock(uint8_t *data, uint16_t dataSize, uint8_t bank, u
     return true;
 }
 bool MPU6050::writeProgMemoryBlock(uint8_t *data, uint16_t dataSize, uint8_t bank, uint8_t address, bool verify) {
-    writeMemoryBlock(data, dataSize, bank, address, verify, true);
+    return writeMemoryBlock(data, dataSize, bank, address, verify, true);
 }
+*/
 
 // DMP_CFG_1 register
 
