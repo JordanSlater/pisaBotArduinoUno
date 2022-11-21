@@ -1,3 +1,6 @@
+#ifdef PROGRAM
+#if PROGRAM == MAIN
+
 #include "I2Cdev.h"
 #include "MPU6050.h"
 #include "calibration.hpp"
@@ -56,3 +59,6 @@ void loop() {
 
     Serial.println(roll);
 }
+
+#endif
+#endif
