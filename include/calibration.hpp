@@ -20,8 +20,8 @@ namespace Calibration {
     struct InertialData {
         Offsets Offset;
         uint8_t ConfigurationFlag;
-        float ScaleFactor;
-        float Range;
+        float LsbPerUnit;
+        float MaxUnitMeasured;
     };
 
     struct Set {
@@ -37,8 +37,8 @@ namespace Calibration {
                 -30673.64 + 16384.0
             },
             0,
-            0,
-            0
+            16384.0,
+            2
         },
         { // GYRO
             {
@@ -47,8 +47,8 @@ namespace Calibration {
                 -243.07
             },
             0,
-            0,
-            0
+            131,
+            250
         }
     };
 };
