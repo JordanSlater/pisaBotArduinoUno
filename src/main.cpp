@@ -4,6 +4,7 @@
 #include "I2Cdev.h"
 #include "MPU6050.h"
 #include "calibration.hpp"
+#include "quaternion.hpp"
 
 // class default I2C address is 0x68
 // specific I2C addresses may be passed as a parameter here
@@ -14,9 +15,9 @@ MPU6050 accelgyro;
 int16_t raw_ax, raw_ay, raw_az;
 int16_t raw_gx, raw_gy, raw_gz;
 
-float roll = 0, pitch = 0, yaw = 0;
-
 long int last_read;
+
+Quaternion rotation;
 
 void setup() {
     // join I2C bus (I2Cdev library doesn't do this automatically)
@@ -53,9 +54,11 @@ void loop() {
     float gy = ((static_cast<float>(raw_gy) - Calibration::DefaultSet.Gyro.Offset.Y) / Calibration::DefaultSet.Gyro.LsbPerUnit) * dt;
     float gz = ((static_cast<float>(raw_gz) - Calibration::DefaultSet.Gyro.Offset.Z) / Calibration::DefaultSet.Gyro.LsbPerUnit) * dt;
 
-    roll += gx;
-    pitch += gy;
-    yaw += gz;
+    Quaternion incremental_rotation = Quaternion::from_euler_rotation(gx, gy, gz);
+
+    rotation *= incremental_rotation;
+
+    rotation.
 
     Serial.println(roll);
 }
